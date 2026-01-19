@@ -6,7 +6,8 @@ services:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
-
+    volumes:
+      - db_data:/var/lib/postgresql/data
   app:
     build: ./php
     environment:
@@ -28,3 +29,5 @@ services:
       - ./nginx/survey.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       - app
+volumes:
+  db_data:
